@@ -5,35 +5,36 @@ import styles from './Form.module.scss'
 
 const FormList = ({name, amount, handleName, handleAmount, handleSubmitForm}) => (
     <div>
-        <div onSubmit={handleSubmitForm}>
+        <form onSubmit={handleSubmitForm}>
             <div className={styles.formFirst}>
                 <TextField
                 type='text'
                 id='expenseName'
                 placeholder='Name of expense?'
                 label="Name"
-                multiline
                 variant="filled"
+                name='name'
                 value={name}
                 onChange={handleName}
                 />
             </div>
             <div className={styles.formSecond}>
                 <TextField
-                type='number'
                 id='expenseAmount'
                 placeholder='0.00'
                 label="Amount"
-                multiline
+                type="number"
                 variant="filled"
+                name='amount'
                 value={amount}
                 onChange={handleAmount}
                 />
+
             </div>
             <Button variant="contained" color="primary" type="submit">
                 ADD
             </Button>
-        </div>
+        </form>
     </div>
 )
 
