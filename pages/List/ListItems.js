@@ -22,19 +22,21 @@ const Listitems = ({ tasks, deleteTasks}) => (
                         }
 
                         action={
-                            <IconButton aria-label="delete" onClick={() => deleteTasks(item.id)}>
-                                <i class="fas fa-trash"></i>
-                            </IconButton>
+                            <div>
+                                <IconButton aria-label="delete" onClick={() => deleteTasks(item.id)}>
+                                    <i class="fas fa-trash"></i>
+                                </IconButton>
+                            </div>
                         }
 
                         title= {item.title}
                         >
                         </CardHeader>
 
-                        <Link href="">
+                        <Link href={`List/DetailTask/${item.id}`}>
                             <a>
                                 <CardContent className={styles.gridTitle}>
-                                   {item.description}
+                                    {item.description}
                                 </CardContent>
                             </a>
                         </Link>

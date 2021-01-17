@@ -40,7 +40,7 @@ const FormList = ({title, description, handleTitle, handleDescription, handleSub
                 ADD
             </Button>
             <Button type="submit" color="secondary" variant="contained" onClick={handleClearTasks} className={styles.formDelete}>
-                DELETE
+                DELETE ALL 
             </Button>
 
         </form>

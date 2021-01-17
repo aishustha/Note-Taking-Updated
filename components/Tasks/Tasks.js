@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import styles from './Tasks.module.scss'
 import FormList from '../Form/FormList'
-import Listitems from '../List/Listitems'
+import Listitems from '../../pages/List/ListItems'
 
 
 //conditional operator
@@ -14,7 +14,6 @@ export default function Tasks() {
     //initial state have empty value
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
-
     //handler methods when user is typing
     //retrieving the value
     const handleTitle = event => {
@@ -59,7 +58,8 @@ export default function Tasks() {
     const deleteTasks = (idToDelete) => {
         const filteredTasks = tasks.filter((item) => item.id !== idToDelete);
         setTasks(filteredTasks);
-      };
+    };
+
 
 
     useEffect(() => {
