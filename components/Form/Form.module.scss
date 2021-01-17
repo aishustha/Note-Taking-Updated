@@ -1,8 +1,12 @@
-.formFirst {
-    margin-bottom: 30px;
-    margin-top: 30px;
+
+.formOuter {
+    .formInner {
+        margin-bottom: 30px;
+        width: 100%;
+    }
 }
 
-.formSecond {
-    margin-bottom: 30px;
+.formAdd {
+    margin-right: 20px !important;
+
 }

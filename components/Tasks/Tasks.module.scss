@@ -1,0 +1,20 @@
+.taskContent{
+    width: 100%;
+    padding: 90px;
+    padding-top: 150px;
+    & form {
+        display: block;
+        text-align: left;
+    }
+    & .addBtn {
+        margin-top: 30px;
+    }
+
+    & .todoTextarea {
+        width: 100%;
+        border: 1px solid #efefef;
+        border-radius: 0.25rem;
+        padding: 15px;
+        font-size: 20px;
+    }
+}

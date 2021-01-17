@@ -3,37 +3,46 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import styles from './Form.module.scss'
 
-const FormList = ({name, amount, handleName, handleAmount, handleSubmitForm}) => (
-    <div>
+const FormList = ({title, description, handleTitle, handleDescription, handleSubmitForm, handleClearTasks}) => (
+    <div className={styles.formOuter}>
         <form onSubmit={handleSubmitForm}>
-            <div className={styles.formFirst}>
+            <div>
                 <TextField
                 type='text'
-                id='expenseName'
-                placeholder='Name of expense?'
-                label="Name"
-                variant="filled"
-                name='name'
-                value={name}
-                onChange={handleName}
+                id='taskTitle'
+                placeholder='Title'
+                label="Title"
+                variant="outlined"
+                name='title'
+                value={title}
+                onChange={handleTitle}
+                multiline
+                className={styles.formInner}
                 />
             </div>
-            <div className={styles.formSecond}>
+            <div>
                 <TextField
-                id='expenseAmount'
-                placeholder='0.00'
-                label="Amount"
-                type="number"
-                variant="filled"
-                name='amount'
-                value={amount}
-                onChange={handleAmount}
+                id='taskDescription'
+                placeholder='Description'
+                label="Description"
+                type="text"
+                name='description'
+                value={description}
+                onChange={handleDescription}
+                rows={4}
+                multiline
+                variant="outlined"
+                className={styles.formInner}
                 />
 
             </div>
-            <Button variant="contained" color="primary" type="submit">
+            <Button variant="contained" color="primary" type="submit" className={styles.formAdd}>
                 ADD
             </Button>
+            <Button type="submit" color="secondary" variant="contained" onClick={handleClearTasks} className={styles.formDelete}>
+                DELETE
+            </Button>
+
         </form>
     </div>
 )

@@ -1,5 +1,32 @@
-.listContent {
-    border: 1px solid #efefef;
-    margin-bottom: 10px;
-    border-radius: 0.25rem;
+.gridContent {
+   padding-top: 60px;
 }
+
+.gridTitle {
+    background: rgb(63 81 181 / 0.1);
+}
+
+
+.cardTitle {
+    text-align: left;
+}
+
+.avatar {
+     background-color:  #3f51b5 !important;
+}
+
+.cardOuter {
+    box-shadow: none!important;
+    border: 1px solid #efefef;
+    outline: 0;
+
+    & i, & svg {
+        color: #3f51b5;
+    }
+
+    & span {
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+

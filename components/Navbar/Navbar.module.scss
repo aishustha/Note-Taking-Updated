@@ -1,0 +1,18 @@
+.navHeader {
+    & ul {
+        list-style: none;
+        text-decoration: transparent;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    & .navListLink {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        & .navBrand {
+            font-size: 25px;
+        }
+    }
+}
