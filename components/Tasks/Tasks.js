@@ -14,6 +14,7 @@ export default function Tasks() {
     //initial state have empty value
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
+    const [edit, setEdit] = useState(false)
     //handler methods when user is typing
     //retrieving the value
     const handleTitle = event => {
@@ -55,12 +56,17 @@ export default function Tasks() {
         setTasks([])
     }
 
-    const deleteTasks = (idToDelete) => {
+    const handleDelete = (idToDelete) => {
         const filteredTasks = tasks.filter((item) => item.id !== idToDelete);
         setTasks(filteredTasks);
     };
 
-
+    const handleEdit = (idToEdit) => {
+        const filteredTasks = tasks.filter((item) => item.id !== idToEdit);
+        const selectedTask = tasks.find((item) => item.id === idToEdit);
+        console.log(selectedTask);
+ 
+    };
 
     useEffect(() => {
         localStorage.setItem('tasks', JSON.stringify(tasks))
@@ -81,7 +87,7 @@ export default function Tasks() {
                     handleSubmitForm={handleSubmitForm}
                     handleClearTasks={handleClearTasks}
                 />
-                <Listitems tasks={tasks} deleteTasks={deleteTasks}/>
+                <Listitems tasks={tasks} handleDelete={handleDelete} handleEdit={handleEdit}/>
             </div>
         </div>
 
