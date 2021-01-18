@@ -31,3 +31,106 @@
 //https://www.code-boost.com/react-local-storage/
 //https://blog.crowdbotics.com/build-a-react-app-with-localstorage-api-and-hooks/
 //https://www.robinwieruch.de/local-storage-react
+
+Synchronous: A synchronous request blocks the client until operation completes. 
+In such case, javascript engine of the browser is blocked.
+
+Asynchronous An asynchronous request doesn’t block the client i.e. browser is responsive. 
+At time, user can perform another operations also. 
+In such case, javascript engine of the browser is not blocked.
+
+
+//API Routes
+
+export default async(req, res) => {
+  const data = {
+    title: 'This is a title',
+    text: 'Hello World'
+  }
+
+  res.statusCode = 200
+  res.json({data})
+}
+
+
+
+//index.js
+export default function Home({data}) {
+  return (
+    <Layout>
+      <Tasks/>
+
+      <div>
+          <h1>{data.title}</h1>
+          <p>{data.text}</p>
+      </div>
+    </Layout>
+  )
+}
+
+
+export async function getStaticProps() {
+  const request = await fetch('http://localhost:3000/api/hello')
+  const json = await request.json()
+
+  return {
+    props: {
+      data: json.data
+    }
+  }
+}
+
+
+
+
+// import comments from './comments.json'
+
+// export default (req, res) => {
+//   res.statusCode = 200
+//   res.json({ comments})
+// }
+
+
+//pages/api/post/[pid].js
+//`Post: ${pid}`
+//`Post: abc`
+//page/api/pos/[...slug].js
+//`Post: ${slug.join(',')}`
+
+
+// export default function handler(req, res) {
+//   const {
+//     query: {pid},
+
+//   } = req
+
+//   res.end(`Post: ${pid}`)
+// }
+ 
+// export default function handler(req, res) {
+//   const {
+//     query: {pid},
+
+//   } = req
+
+//   res.end(`Post: pid`)
+// }
+ 
+
+// export default function handler(req, res) {
+//   const {
+//     query: {slug},
+
+//   } = req
+
+//   res.end(`Post: ${slug.join(',')}`)
+// }
+ 
+
+// `pages/api/post/create.js` - match  `/api/post/create`
+// `pages/api/post/[pid].js` - match  `/api/post/1` also `/api/post/abc`
+// `pages/api/post/[...slug].js` - match `/api/post/1/2`, `/api/post/a/b/c`
+
+
+//CORS - Cross origin resource sharing- An Http-header based mechanism - allows a server to indicate
+//any other origins that its own from which a browser should permit loading of resources

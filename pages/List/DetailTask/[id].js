@@ -16,6 +16,8 @@ const getTaskById = taskId => {
     }
     return null;
 }
+
+//props = tasks
 const DetailTask = (tasks) => {
     const task = getTaskById(tasks.taskId);
     if (!task) {
@@ -32,7 +34,6 @@ const DetailTask = (tasks) => {
                                 A
                             </Avatar>
                         }
-            
 
                         title= {task.title}
                         >
@@ -50,12 +51,12 @@ const DetailTask = (tasks) => {
 
 //getInitialProps to fetch data when your component acts as a Page, and you want to provide the data as Props.
 
-//ctx(Context) is the objecr passed down by getinitialProps()
+//ctx(Context) is the object passed down by getinitialProps()
 //ctx disables the ability to perform automatic static optimization, causing every page in the app to be server-side-rendered.
 
 DetailTask.getInitialProps = async (ctx) => {
     const taskId = ctx.query.id;
-    //ctx.query ot ctx.requets.query is the query string items represented as an object
+    //ctx.query ot ctx.requests.query is the query string items represented as an object
     return { taskId: taskId }
 }
 export default DetailTask;
