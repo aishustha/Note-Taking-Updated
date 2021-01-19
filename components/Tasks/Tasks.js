@@ -17,16 +17,16 @@ export default function Tasks() {
     //handler methods when user is typing
     //retrieving the value
     const handleTitle = event => {
-        console.log('Title', event.target.value)
+        //console.log('Title', event.target.value)
         setTitle(event.target.value)
     }
 
     const handleDescription = event => {
-        console.log('Description', event.target.value)
+        //console.log('Description', event.target.value)
         setDescription(event.target.value)
     }
 
-    const handleSubmitForm = event => {
+    const handleSubmitForm = async event => {
         event.preventDefault()
         //check whether the name is not empty and the amount is not negative
 
@@ -39,6 +39,15 @@ export default function Tasks() {
                 title, 
                 description
             };
+
+
+            await fetch('http://localhost:3000/api/hello', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                  },
+                body: JSON.stringify(task)
+            });
 
             setTasks([...tasks, task])
 
