@@ -5,31 +5,36 @@ const Tasks = dynamic(() => import("../components/Tasks/Tasks"), {
   ssr: false,
 });
 
-
-export default function Home({data}) {
+function Home({posts}) {
   return (
     <Layout>
       <Tasks/>
-
-      <div>
-          <h1>{data.title}</h1>
-          <p>{data.description}</p>
-      </div>
+      {posts.title}
     </Layout>
+
   )
 }
-
-
 export async function getStaticProps() {
-  const request = await fetch('http://localhost:3000/api/hello');
-  const json = await request.json()
+    const res = await fetch('http://localhost:3000/api/hello', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+        },
+      });
+            
+    const posts = await res.json()
 
+  // By returning { props: posts }, the Blog component
+  // will receive `posts` as a prop at build time
   return {
     props: {
-      data: json.data
-    }
+      posts,
+    },
   }
 }
+
+
+export default Home;
 
 
 //https://stackoverflow.com/questions/62451917/fetching-data-from-api-using-nextjs-and-material-ui-react

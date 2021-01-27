@@ -37,6 +37,7 @@ const Listitems = ({ tasks, handleDelete}) => (
                             <a>
                                 <CardContent className={styles.gridTitle}>
                                     {item.description}
+                                 
                                 </CardContent>
                             </a>
                         </Link>
@@ -44,6 +45,7 @@ const Listitems = ({ tasks, handleDelete}) => (
                 </Grid>
             ))}
         </Grid>
+
     </div>
 )
 

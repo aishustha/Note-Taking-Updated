@@ -41,13 +41,17 @@ export default function Tasks() {
             };
 
 
-            await fetch('http://localhost:3000/api/hello', {
+            const res = await fetch('http://localhost:3000/api/hello', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                   },
                 body: JSON.stringify(task)
             });
+            
+
+            const fetchdata = await res.json()
+            console.log(fetchdata)
 
             setTasks([...tasks, task])
 
@@ -55,7 +59,7 @@ export default function Tasks() {
             setTitle('')
             setDescription('')
         }else {
-            console.log('Invalid tasks.')
+            console.log('Deleted')
         }
     }
 
@@ -91,6 +95,7 @@ export default function Tasks() {
                 />
                 <Listitems tasks={tasks} handleDelete={handleDelete}/>
             </div>
+          
         </div>
 
     )

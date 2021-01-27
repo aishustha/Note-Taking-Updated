@@ -1,5 +1,5 @@
-// Test database.
 const NOTES = [];
+
 /**
  * API has 4 methods
  * GET -> get data
@@ -7,6 +7,7 @@ const NOTES = [];
  * PUT -> update existing data
  * DELETE -> delete data
  */
+
 export default async(req, res) => {
   switch (req.method) {
     case 'GET':
@@ -14,6 +15,9 @@ export default async(req, res) => {
       res.json({ data: NOTES })
       break;
     case 'POST':
+
+    //req.body - An object containing the body parse by content-type or null if no body was sent
+
       const id = req.body.id;
       const title = req.body.title;
       const description = req.body.description;
@@ -27,16 +31,4 @@ export default async(req, res) => {
       break;
   }  
 }
-
-// export default async(req, res) => {
-//   const data = 
-//     {   
-//         title: 'Pages',
-//         description: 'In Next.js, a page is a React Component exported from a .js, .jsx, .ts, or .tsx file in the pages directory. Each page is associated with a route based on its file name.'
-//     }
-  
-//   res.statusCode = 200
-//   res.json({data})
-// }
-
 
