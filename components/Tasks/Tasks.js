@@ -5,7 +5,8 @@ import Listitems from '../../pages/List/ListItems'
 
 
 //conditional operator
-const ALL_TASKS = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')): [];
+// let ALL_TASKS = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')): [];
+let ALL_TASKS = [];
 
 //getItem() from the localStorage API - can read any value stored
 
@@ -27,6 +28,7 @@ export default function Tasks() {
     }
 
     const handleSubmitForm = async event => {
+        console.log('called')
         event.preventDefault()
         //check whether the name is not empty and the amount is not negative
 
@@ -40,7 +42,7 @@ export default function Tasks() {
                 description
             };
 
-
+            // Save notes to API.
             const res = await fetch('http://localhost:3000/api/hello', {
                 method: 'POST',
                 headers: {
@@ -74,9 +76,24 @@ export default function Tasks() {
     };
 
 
-    useEffect(() => {
-        localStorage.setItem('tasks', JSON.stringify(tasks))
-    }, [tasks])
+    useEffect(async () => {
+        console.log('fetch data');
+        // localStorage.setItem('tasks', JSON.stringify(tasks))
+        const res = await fetch('http://localhost:3000/api/hello');
+        const fetchdata = await res.json()
+        console.log(fetchdata);
+        console.log('got notes')
+        setTasks(fetchdata.data);
+        // ALL_TASKS = fetchdata;
+    }, [])
+
+
+    //using setState inside useEffect will create an infinite loop that most likely you don't want to cause. 
+    //useEffect is called after each render and when setState is used inside of it, it will cause the component to re-render which will call useEffect and so on and so on.
+    //One of the popular cases that using useState inside of useEffect will not cause an infinite loop 
+    //is when you pass an empty array as a second argument to useEffect like useEffect(() => {....}, []) 
+    //which means that the effect function should be called once: after the first mount/render only. 
+    //This is used widely when you're doing data fetching in a component and you want to save the request data in the component's state.
 
     //key(tasks) = setitem() = getItem()
     //need to pass as props in form components
