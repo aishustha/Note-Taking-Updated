@@ -5,21 +5,66 @@ import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
 import Avatar from '@material-ui/core/Avatar'
+import { useState } from 'react'
 
-const getTaskById = taskId => {
-    const tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')): [];
-    if (tasks && tasks.length > 0) {
-        const task = tasks.filter((t) => t.id === taskId);
-        if (task) {
-            return task[0];
-        }
+const fetcher = async () => {
+    const res= await fetch ('http://localhost:3000/api/hello')
+    const fetchdata = await res.json()
+
+    if (res.status !== 200) {
+        throw new Error(fetchdata.id)
     }
-    return null;
+    console.log('fetchdata')
+    return data
 }
+
+
+
+
+
+const getTaskById = async(taskId)=> {
+
+    const res= await fetch (`http://localhost:3000/api/hello?id=${taskId}`)
+    const fetchdata = await res.json()
+    
+
+    if (res.status !== 200) {
+        throw new Error(fetchdata.id)
+    }
+
+    const [note, setNote] = useState(fetchdata.note);
+
+
+    console.log(fetchData)
+    // return data
+
+    const tasks = [];
+    // const task = tasks.filter((t) => t.id === taskId);
+    // console.log(tasks)
+    // if (task) {
+    //     return task[0];
+    // }
+   
+    // if (tasks && tasks.length > 0) {
+      
+    //     const task = tasks.filter((t) => t.id === taskId);
+    //     console.log(tasks)
+    //     if (task) {
+    //         return task[0];
+    //     }
+    // }
+    // return null;
+}
+
+
+
 
 //props = tasks
 const DetailTask = (tasks) => {
-    const task = getTaskById(tasks.taskId);
+    getTaskById(tasks.taskId);
+
+    // const task = this.state.note;     
+
     if (!task) {
         return (
             <h3>Task not found</h3>
@@ -56,7 +101,7 @@ const DetailTask = (tasks) => {
 
 DetailTask.getInitialProps = async (ctx) => {
     const taskId = ctx.query.id;
-    //ctx.query ot ctx.requests.query is the query string items represented as an object
+    console.log(taskId)
     return { taskId: taskId }
 }
 export default DetailTask;

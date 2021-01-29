@@ -11,8 +11,15 @@ const NOTES = [];
 export default async(req, res) => {
   switch (req.method) {
     case 'GET':
-      res.statusCode = 200
-      res.json({ data: NOTES })
+      
+      if(req.query.id) {
+        const id  = req.query.id;
+        console.log(NOTES);
+        res.json({'note':232323});
+      }else {
+        res.statusCode = 200;
+        res.json({ data: NOTES });
+      }
       break;
     case 'POST':
 

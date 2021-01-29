@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import styles from './Tasks.module.scss'
 import FormList from '../Form/FormList'
-import Listitems from '../../pages/List/ListItems'
+import ListItems from '../../pages/List/ListItems'
 
 
 //conditional operator
@@ -15,6 +15,8 @@ export default function Tasks() {
     //initial state have empty value
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
+    const [edit, setEdit] = useState(false);
+
     //handler methods when user is typing
     //retrieving the value
     const handleTitle = event => {
@@ -28,9 +30,9 @@ export default function Tasks() {
     }
 
     const handleSubmitForm = async event => {
-        console.log('called')
+        //console.log('called')
         event.preventDefault()
-        //check whether the name is not empty and the amount is not negative
+        //check whether the name is not empty and the description is not negative
 
         if(title !== '' && description !== '') {
             //single expense object
@@ -48,12 +50,12 @@ export default function Tasks() {
                 headers: {
                     'Content-Type': 'application/json'
                   },
-                body: JSON.stringify(task)
+                body: JSON.stringify(task) //convert js obj to string
             });
             
 
-            const fetchdata = await res.json()
-            console.log(fetchdata)
+            //const fetchdata = await res.json()
+            //console.log(fetchdata)
 
             setTasks([...tasks, task])
 
@@ -73,7 +75,12 @@ export default function Tasks() {
     const handleDelete = (idToDelete) => {
         const filteredTasks = tasks.filter((item) => item.id !== idToDelete);
         setTasks(filteredTasks);
-    };
+    }
+
+
+    const handleEdit = () => {
+        setEdit(!edit);
+    }
 
 
     useEffect(async () => {
@@ -109,8 +116,9 @@ export default function Tasks() {
                     handleDescription={handleDescription}
                     handleSubmitForm={handleSubmitForm}
                     handleClearTasks={handleClearTasks}
+                    handleEdit={handleEdit}
                 />
-                <Listitems tasks={tasks} handleDelete={handleDelete}/>
+                <ListItems tasks={tasks} handleDelete={handleDelete}/>
             </div>
           
         </div>
