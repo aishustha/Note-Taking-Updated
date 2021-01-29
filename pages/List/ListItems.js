@@ -12,9 +12,9 @@ const ListItems = ({ tasks, handleDelete}) => (
     <div>
         <Grid container spacing={4} className={styles.gridContent}>
             {tasks.map(item => (
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} md={4} key={item.id}>
                      
-                     <Card className={styles.cardOuter} key={item.id}> 
+                     <Card className={styles.cardOuter}> 
                         <CardHeader className={styles.cardTitle} 
                         
                         avatar={

@@ -14,8 +14,15 @@ export default async(req, res) => {
       
       if(req.query.id) {
         const id  = req.query.id;
-        console.log(NOTES);
-        res.json({'note':232323});
+        const notes = NOTES;
+        let retNote = [];
+        Object.keys(notes).forEach((key) => {
+            if (notes[key].id == id) {
+                retNote = notes[key];
+            }
+        })
+        // console.log(retNote);
+        res.json({data: retNote});
       }else {
         res.statusCode = 200;
         res.json({ data: NOTES });
