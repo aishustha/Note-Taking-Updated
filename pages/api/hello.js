@@ -15,14 +15,14 @@ export default async(req, res) => {
       if(req.query.id) {
         const id  = req.query.id;
         const notes = NOTES;
-        let retNote = [];
+        let setNote = [];
         Object.keys(notes).forEach((key) => {
             if (notes[key].id == id) {
-                retNote = notes[key];
+                setNote = notes[key];
             }
         })
         // console.log(retNote);
-        res.json({data: retNote});
+        res.json({data: setNote});
       }else {
         res.statusCode = 200;
         res.json({ data: NOTES });
