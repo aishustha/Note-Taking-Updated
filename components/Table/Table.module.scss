@@ -1,12 +1,38 @@
 .tableFlex {
     display: flex;
+
     
+}
+
+.tableContent {
+    margin: 90px;
+    margin-top: 0px;
 }
 
 .tableAdd {
     margin-right: 60px;
+
+    & button {
+        padding: 5px;
+        box-shadow: none;
+        margin-top: 15px;
+    }
+
+    & input {
+        padding: 10px;
+        margin-left: 15px;
+        margin-bottom: 15px;
+    }
 }
 
 .tableView {
     text-align: left;
+
+    & tr, & td, & th {
+        padding: 10px;
+    }
+
+    & h2 {
+        padding-left: 10px;
+    }
 }

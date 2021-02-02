@@ -8,7 +8,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
 import Avatar from '@material-ui/core/Avatar'
 
-const ListItems = ({ tasks, handleDelete}) => (
+const ListItems = ({ tasks, handleDelete, handleEdit}) => (
     <div>
         <Grid container spacing={4} className={styles.gridContent}>
             {tasks.map(item => (
@@ -27,6 +27,9 @@ const ListItems = ({ tasks, handleDelete}) => (
                             <div>
                                 <IconButton aria-label="delete" onClick={() => handleDelete(item.id)}>
                                     <i class="fas fa-trash"></i>
+                                </IconButton>
+                                <IconButton aria-label="edit" onClick={() => handleEdit(item)}>
+                                    <i class="fas fa-edit"></i>
                                 </IconButton>
                             </div>
                         }

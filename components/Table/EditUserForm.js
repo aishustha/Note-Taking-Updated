@@ -29,6 +29,7 @@ const EditUserForm = (props) => {
                 value={user.name}
                 onChange={handleInputChange}
             />
+            <br/>
 
             <label>Username</label>
 
@@ -38,6 +39,7 @@ const EditUserForm = (props) => {
                 value={user.username}
                 onChange={handleInputChange}
             />
+            <br/>
             <button>Update User</button>
             <button 
                 onClick={() => props.setEditing(false)}

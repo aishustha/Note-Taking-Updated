@@ -15,7 +15,7 @@ export default function Tasks() {
     //initial state have empty value
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
-    const [edit, setEdit] = useState(false);
+    const [ editing, setEditing ] = useState(false)
 
     //handler methods when user is typing
     //retrieving the value
@@ -78,8 +78,26 @@ export default function Tasks() {
     }
 
 
-    const handleEdit = () => {
-        setEdit(!edit);
+    // const handleDelete = (idToDelete) => {
+    //     if(window.confirm('Are you sure?')) 
+    //     {
+    //         fetch('http://localhost:3000/api/hello'+tasks.id, {
+    //             method: 'DELETE',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //               },
+    //         });
+    //     }
+    // }
+
+    const handleEdit = (task) => {
+        setEditing(true)
+        setTasks({ id: task.id, title: task.title, description: task.description })
+    }
+
+    const updateUser = (id, updateUser) => {
+        setEditing(false)
+        setUsers(tasks.map((task) => (task.id === id ? updateUser : task )))
     }
 
 
@@ -101,7 +119,6 @@ export default function Tasks() {
     //is when you pass an empty array as a second argument to useEffect like useEffect(() => {....}, []) 
     //which means that the effect function should be called once: after the first mount/render only. 
     //This is used widely when you're doing data fetching in a component and you want to save the request data in the component's state.
-
     //key(tasks) = setitem() = getItem()
     //need to pass as props in form components
 
@@ -116,9 +133,9 @@ export default function Tasks() {
                     handleDescription={handleDescription}
                     handleSubmitForm={handleSubmitForm}
                     handleClearTasks={handleClearTasks}
-                    handleEdit={handleEdit}
+                    updateUser={updateUser}
                 />
-                <ListItems tasks={tasks} handleDelete={handleDelete}/>
+                <ListItems tasks={tasks} handleDelete={handleDelete} handleEdit={handleEdit}/>
             </div>
           
         </div>

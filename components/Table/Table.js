@@ -42,7 +42,7 @@ const Table = () => {
 
     return (
         <div className={styles.tableContent}>
-            <h1>CRUD App with Hooks</h1>
+            <h1>CRUD Application</h1>
             <div className={styles.tableFlex}>
                 <div className={styles.tableAdd}>
 

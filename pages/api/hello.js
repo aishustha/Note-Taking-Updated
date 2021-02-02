@@ -41,6 +41,10 @@ export default async(req, res) => {
       res.statusCode = 200
       res.json({ data: NOTES });
       break;
+
+    case 'DELETE':
+      res.statusCode = 200
+      res.json({ data: NOTES });
     default:
       break;
   }  
