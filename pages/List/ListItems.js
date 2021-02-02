@@ -10,6 +10,7 @@ import Avatar from '@material-ui/core/Avatar'
 
 const ListItems = ({ tasks, handleDelete, handleEdit}) => (
     <div>
+    {console.log(tasks)}
         <Grid container spacing={4} className={styles.gridContent}>
             {tasks.map(item => (
                 <Grid item xs={12} md={4} key={item.id}>

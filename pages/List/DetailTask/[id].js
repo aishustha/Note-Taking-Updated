@@ -6,17 +6,21 @@ import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
 import Avatar from '@material-ui/core/Avatar'
+import FormList from '../../../components/Form/FormList'
+import Form from '../../../components/Form/form';
 
 class Detail extends React.Component {
 
      static async getInitialProps(ctx) {
         return { taskId: ctx.query.id};
       }
-
+t
       constructor(props) {
         super(props);
         this.state = {
-          note: {}
+          note: {},
+          title:"",
+          description:""
         }
       }
 
@@ -24,6 +28,41 @@ class Detail extends React.Component {
           const { taskId } = this.props;
          this.getDetail(taskId);
       }
+
+
+    handleTitle = event => {
+        console.log("handle change")
+        this.setState({"title":event.target.value})
+    }
+
+    handleDescription = event => {
+        console.log("handle description")
+        this.setState({description:event.target.value})
+    }
+
+    handleSubmitForm = async event => {
+        //console.log('called')
+        event.preventDefault()
+
+        const task = {
+            title: this.state.title,  // title -> title1
+            description: this.state.description // desci
+        };
+
+        const res = await fetch(`http://localhost:3000/api/hello?id=${this.state.note.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify(task) //convert js obj to string
+        });
+
+        const updateData = await res.json()
+
+        this.setState({note: updateData.data})
+        
+
+    }
 
       getDetail = async() => {
           const {taskId} = this.props;
@@ -35,12 +74,14 @@ class Detail extends React.Component {
                 throw new Error(fetchdata.data.id)
             }
             
-            this.setState({note: fetchdata.data});
+            this.setState({note: fetchdata.data, title: fetchdata.data.title, description: fetchdata.data.description});
 
       }
 
       render () {
           const {note} = this.state;
+
+          console.log(note);
           return (
             <div>
         {
@@ -63,10 +104,23 @@ class Detail extends React.Component {
                             {note.description}
                         </CardContent>
                     </Card>
+<form onSubmit={this.handleSubmitForm}>
+                    <Form 
+       title={note.title} 
+       description={note.description} 
+       handleTitle={this.handleTitle}
+           handleDescription={this.handleDescription}
+           handleSubmitForm={this.handleSubmitForm}
+       />
+       <button type="submit"> update</button>
+       </form>
                 </div>
             </Layout>
+
+
         }
     </div>
+    
           )
         
 

@@ -33,13 +33,14 @@ export default function Tasks() {
         //console.log('called')
         event.preventDefault()
         //check whether the name is not empty and the description is not negative
-
+        console.log(title)
+        console.log(description)
         if(title !== '' && description !== '') {
             //single expense object
             //donot override previous values in the array
             //use spread operator to access previous values
             const task = {
-                id: Math.random().toString(36).substr(2, 9),
+               
                 title, 
                 description
             };
@@ -54,10 +55,10 @@ export default function Tasks() {
             });
             
 
-            //const fetchdata = await res.json()
+            const fetchdata = await res.json()
             //console.log(fetchdata)
 
-            setTasks([...tasks, task])
+            setTasks([...tasks, fetchdata.data])
 
             //clean input fields
             setTitle('')
@@ -72,32 +73,53 @@ export default function Tasks() {
         setTasks([])
     }
 
-    const handleDelete = (idToDelete) => {
-        const filteredTasks = tasks.filter((item) => item.id !== idToDelete);
-        setTasks(filteredTasks);
-    }
-
-
     // const handleDelete = (idToDelete) => {
-    //     if(window.confirm('Are you sure?')) 
-    //     {
-    //         fetch('http://localhost:3000/api/hello'+tasks.id, {
-    //             method: 'DELETE',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //               },
-    //         });
-    //     }
+    //     const filteredTasks = tasks.filter((item) => item.id !== idToDelete);
+    //     setTasks(filteredTasks);
     // }
+
+
+    const handleDelete = async idToDelete => {
+        if(window.confirm('Are you sure?')) 
+        {
+            const res = await fetch(`http://localhost:3000/api/hello?id=${idToDelete}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                  },
+            });
+
+            const filteredTasks = tasks.filter((item) => item.id !== idToDelete);
+            setTasks(filteredTasks);
+        //     const deletedata = await res.json()
+        //     console.log(deletedata);
+        //     setTasks(deletedata.data);
+        }
+    }
 
     const handleEdit = (task) => {
         setEditing(true)
         setTasks({ id: task.id, title: task.title, description: task.description })
     }
 
-    const updateUser = (id, updateUser) => {
-        setEditing(false)
-        setUsers(tasks.map((task) => (task.id === id ? updateUser : task )))
+    // const updateUser = (id, updateUser) => {
+    //     setEditing(false)
+    //     setUsers(tasks.map((task) => (task.id === id ? updateUser : task )))
+    // }
+
+    const updateUser = async (updateUser) => {
+        {
+
+            const res = await fetch(`http://localhost:3000/api/hello?id=${updateUser}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                  },
+            });
+
+            // const filteredTasks = tasks.filter((item) => item.id !== idToDelete);
+            // setTasks(filteredTasks);
+        }
     }
 
 
