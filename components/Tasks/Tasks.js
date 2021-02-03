@@ -72,15 +72,16 @@ export default function Tasks() {
 
 
 
-    const handleDelete = async idToDelete => {
-        const res = await fetch(`http://localhost:3000/api/hello?id=${idToDelete}`, {
+    const handleDelete = async idDelete => {
+        const res = await fetch(`http://localhost:3000/api/hello?id=${idDelete}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
                 },
+                
         });
 
-        // const filteredTasks = tasks.filter((item) => item.id !== idToDelete);
+        // const filteredTasks = tasks.filter((item) => item.id !== idDelete);
         // setTasks(filteredTasks);
         const deletedata = await res.json();
         setTasks(deletedata.data);
