@@ -15,7 +15,7 @@ export default function Tasks() {
     //initial state have empty value
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
-    const [ editing, setEditing ] = useState(false)
+
 
     //handler methods when user is typing
     //retrieving the value
@@ -40,7 +40,6 @@ export default function Tasks() {
             //donot override previous values in the array
             //use spread operator to access previous values
             const task = {
-               
                 title, 
                 description
             };
@@ -69,69 +68,32 @@ export default function Tasks() {
     }
 
 
-    const handleClearTasks = () => {
-        setTasks([])
-    }
-
-    // const handleDelete = (idToDelete) => {
-    //     const filteredTasks = tasks.filter((item) => item.id !== idToDelete);
-    //     setTasks(filteredTasks);
+    // const handleClearTasks = () => {
+    //     setTasks([])
     // }
+
 
 
     const handleDelete = async idToDelete => {
-        if(window.confirm('Are you sure?')) 
-        {
-            const res = await fetch(`http://localhost:3000/api/hello?id=${idToDelete}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                  },
-            });
+        const res = await fetch(`http://localhost:3000/api/hello?id=${idToDelete}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+                },
+        });
 
-            const filteredTasks = tasks.filter((item) => item.id !== idToDelete);
-            setTasks(filteredTasks);
-        //     const deletedata = await res.json()
-        //     console.log(deletedata);
-        //     setTasks(deletedata.data);
-        }
-    }
-
-    const handleEdit = (task) => {
-        setEditing(true)
-        setTasks({ id: task.id, title: task.title, description: task.description })
-    }
-
-    // const updateUser = (id, updateUser) => {
-    //     setEditing(false)
-    //     setUsers(tasks.map((task) => (task.id === id ? updateUser : task )))
-    // }
-
-    const updateUser = async (updateUser) => {
-        {
-
-            const res = await fetch(`http://localhost:3000/api/hello?id=${updateUser}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                  },
-            });
-
-            // const filteredTasks = tasks.filter((item) => item.id !== idToDelete);
-            // setTasks(filteredTasks);
-        }
+        // const filteredTasks = tasks.filter((item) => item.id !== idToDelete);
+        // setTasks(filteredTasks);
+        const deletedata = await res.json();
+        setTasks(deletedata.data);
     }
 
 
     useEffect(async () => {
-        console.log('fetch data');
         // localStorage.setItem('tasks', JSON.stringify(tasks))
         const res = await fetch('http://localhost:3000/api/hello');
         const fetchdata = await res.json()
-        console.log(fetchdata);
-        console.log('got notes')
         setTasks(fetchdata.data);
-        // ALL_TASKS = fetchdata;
     }, [])
 
 
@@ -147,6 +109,7 @@ export default function Tasks() {
     return (
         <div>
             <div className={styles.taskContent}>
+                <h1>Add Fields</h1>
                 {/* passing as a prop */}
                 <FormList   
                     title={title}
@@ -154,10 +117,9 @@ export default function Tasks() {
                     handleTitle={handleTitle}
                     handleDescription={handleDescription}
                     handleSubmitForm={handleSubmitForm}
-                    handleClearTasks={handleClearTasks}
-                    updateUser={updateUser}
+                    //handleClearTasks={handleClearTasks}
                 />
-                <ListItems tasks={tasks} handleDelete={handleDelete} handleEdit={handleEdit}/>
+                <ListItems tasks={tasks} handleDelete={handleDelete}/>
             </div>
           
         </div>

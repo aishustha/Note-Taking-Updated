@@ -8,13 +8,11 @@ import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
 import Avatar from '@material-ui/core/Avatar'
 
-const ListItems = ({ tasks, handleDelete, handleEdit}) => (
+const ListItems = ({ tasks, handleDelete}) => (
     <div>
-    {console.log(tasks)}
         <Grid container spacing={4} className={styles.gridContent}>
             {tasks.map(item => (
                 <Grid item xs={12} md={4} key={item.id}>
-                     
                      <Card className={styles.cardOuter}> 
                         <CardHeader className={styles.cardTitle} 
                         
@@ -27,10 +25,7 @@ const ListItems = ({ tasks, handleDelete, handleEdit}) => (
                         action={
                             <div>
                                 <IconButton aria-label="delete" onClick={() => handleDelete(item.id)}>
-                                    <i class="fas fa-trash"></i>
-                                </IconButton>
-                                <IconButton aria-label="edit" onClick={() => handleEdit(item)}>
-                                    <i class="fas fa-edit"></i>
+                                    <i className="fas fa-trash"></i>
                                 </IconButton>
                             </div>
                         }
@@ -50,7 +45,6 @@ const ListItems = ({ tasks, handleDelete, handleEdit}) => (
                 </Grid>
             ))}
         </Grid>
-
     </div>
 )
 
