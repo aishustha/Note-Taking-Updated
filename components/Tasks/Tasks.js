@@ -33,8 +33,6 @@ export default function Tasks() {
         //console.log('called')
         event.preventDefault()
         //check whether the name is not empty and the description is not negative
-        console.log(title)
-        console.log(description)
         if(title !== '' && description !== '') {
             //single expense object
             //donot override previous values in the array

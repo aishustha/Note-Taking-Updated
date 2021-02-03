@@ -37,7 +37,6 @@ export default async(req, res) => {
       break;
 
     case 'DELETE':
-      console.log("DELETE")
       let idDelete = req.query.id; //id -> note id to be deleted
       const removeNote = NOTES.findIndex((note) => note.id !==idDelete ); //findIndex return the first element in the array
       console.log(removeNote);
